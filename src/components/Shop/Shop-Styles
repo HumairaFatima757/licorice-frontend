@@ -1,0 +1,35 @@
+export const shopRopesStyles = {
+  section: "flex flex-col md:flex-row px-4 sm:px-6 py-16 gap-4",
+
+  leftColumn: "flex flex-col md:w-1/2 gap-2 items-center md:items-start",
+  heading: "text-3xl sm:text-4xl md:text-5xl font-bold max-w-full sm:max-w-[400px] text-center md:text-left mb-4",
+  leftImage: "w-full sm:w-[400px] h-auto rounded-lg object-cover mt-4",
+
+  rightColumn: "flex flex-col md:w-1/2 relative mt-8 md:mt-38",
+  productHeading: "text-2xl sm:text-3xl md:text-3xl font-bold",
+  productSub: "text-gray-700 text-sm sm:text-base",
+
+  //    always row layout (small, medium, large)
+  optionsContainer: "flex flex-row items-start gap-4 sm:gap-10 mt-4 relative",
+
+  optionsColumn: "flex flex-col gap-2",
+
+  optionItem: (selected) =>
+    `flex items-center gap-3 px-3 py-2 rounded-xl cursor-pointer w-full sm:w-[340px] ${
+      selected ? "bg-green-200" : "bg-gray-100"
+    }`,
+
+  checkbox: (selected) =>
+    `w-5 h-5 flex items-center justify-center rounded-sm border ${
+      selected ? "bg-green-500 border-green-500" : "bg-white border-gray-400"
+    }`,
+
+  upDownButtons: "flex flex-col gap-2 mt-1",
+
+  button: "bg-yellow-500 text-white p-3 rounded-2xl disabled:opacity-50 flex items-center justify-center w-[40px] h-[40px]",
+
+  selectButton: (selected) =>
+    `mt-6 sm:mt-20 px-3 w-full sm:w-[300px] rounded-xl font-bold transition-colors text-sm ${
+      selected ? "bg-yellow-400 hover:bg-yellow-500" : "bg-yellow-300 cursor-not-allowed"
+    }`,
+};
