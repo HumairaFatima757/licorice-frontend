@@ -1,34 +1,38 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate  } from "react-router-dom";
+
 import Preloader from "./components/Preloader/Preloader";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import useAOS from "./hook/useAOS";
 import Navbar from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 import Home from "./pages/Home/Home";
 import Shop from "./pages/Shop/Shop";
 import Fundraising from "./pages/Fundraising/Fundraising";
 import Blog from "./pages/Blog/Blog";
-import Footer from "./components/Footer/Footer";
 import Cart from "./components/Cart/Cart";
 import WishList from "./components/WishList/WishList";
 
-function App() {
- useAOS();
+import useAOS from "./hook/useAOS";
 
- const [loading, setLoading] = useState(true);
+function AppContent() {
+  useAOS();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 2500); // 2.5 sec
+    const timer = setTimeout(() => {
+      setLoading(false);
+      navigate("/"); // now it works
+    }, 2500);
+    return () => clearTimeout(timer);
   }, []);
- 
+
   return (
     <>
-    {loading ? (
-        <Preloader />
-      ) : (
-        <Router>
-          <Navbar />
-
+      {loading && <Preloader />}
+      <div className={loading ? "hidden" : "flex flex-col min-h-screen"}>
+        <Navbar />
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
@@ -37,11 +41,20 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/wishlist" element={<WishList />} />
           </Routes>
-
-          <Footer />
-        </Router>
-      )} </>
-  )
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
 }
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
 
 export default App;
